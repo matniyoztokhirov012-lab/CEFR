@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101010" />
+    <title>CEFR MASTER — Dark Elite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <a class="brand" href="#" data-page="dashboard">
+                <span class="brand-mark">C<span>.</span></span>
+                <span class="brand-text">CEFR <b>MASTER</b><small>ENGLISH / YOUR NEXT LEVEL</small></span>
+            </a>
+            <div class="side-caption">LEARNING SPACE</div>
+            <nav class="nav">
+                <button class="nav-link active" data-page="dashboard"><span>⌂</span> Bosh sahifa</button>
+                <button class="nav-link" data-page="lessons"><span>▤</span> Darsliklar <i>01</i></button>
+                <button class="nav-link" data-page="tests"><span>✓</span> Test markazi</button>
+                <button class="nav-link" data-page="vocabulary"><span>Aa</span> Lug‘at daftari</button>
+                <button class="nav-link" data-page="typing"><span>⌨</span> Typing lab</button>
+                <button class="nav-link" data-page="skills"><span>◉</span> 4 ko‘nikma</button>
+                <button class="nav-link" data-page="levels"><span>↗</span> CEFR yo‘li</button>
+            </nav>
+            <div class="sidebar-spacer"></div>
+            <div class="side-quote">
+                <span class="quote-symbol">“</span>
+                <p>A new language is a new life.</p>
+                <small>YOUR DAILY REMINDER</small>
+            </div>
+            <div class="profile-row">
+                <div class="profile-avatar">M</div>
+                <div class="profile-copy"><b>O‘quvchi</b><small id="profileLevel">A1 · Beginner</small></div>
+                <button id="resetProgress" class="icon-button" title="Progressni tiklash">↻</button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <button class="mobile-menu" id="mobileMenu" aria-label="Menyuni ochish">☰</button>
+                <div class="crumb"><span>CEFR MASTER</span><b>/</b><strong id="pageTitle">Bosh sahifa</strong></div>
+                <div class="top-right"><span class="today" id="todayDate"></span><button class="goal-button"
+                        id="goalButton"><span class="goal-dot"></span> Kunlik maqsad</button></div>
+            </header>
+
+            <section class="page active" id="page-dashboard">
+                <div class="hero">
+                    <div class="hero-copy">
+                        <div class="eyebrow"><span class="orange-dot"></span> YOUR ENGLISH JOURNEY STARTS HERE</div>
+                        <h1>Bugun o‘rgan.<br><span>Ertaga erkin gapir.</span></h1>
+                        <p>Ingliz tilini noldan boshlang va CEFR maqsadingizga o‘z sur’atingizda yetib boring.</p>
+                        <div class="hero-actions"><button class="btn btn-orange" data-go="lessons">Darsni boshlash
+                                <span>↗</span></button><button class="btn btn-ghost" data-go="levels">Darajalarni
+                                ko‘rish <span>→</span></button></div>
+                        <div class="hero-meta"><span><i class="meta-check">✓</i> A1 dan C1 gacha</span><span><i
+                                    class="meta-check">✓</i> Bepul mashqlar</span></div>
+                    </div>
+                    <div class="hero-art" aria-hidden="true">
+                        <div class="art-ring ring-one"></div>
+                        <div class="art-ring ring-two"></div>
+                        <div class="art-number">01<span>/05</span></div>
+                        <div class="art-card"><small>YOUR NEXT LEVEL</small><strong>A1 <em>→</em> C1</strong>
+                            <div class="art-line"><i></i></div>
+                            <p>Progress starts with one word.</p>
+                        </div>
+                        <div class="art-stamp">ENGLISH<br>MODE <b>ON</b></div>
+                        <span class="art-star star-a">✳</span><span class="art-star star-b">✦</span>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <div><span class="section-kicker">YOUR OVERVIEW</span>
+                        <h2>O‘quv paneli<span class="orange-period">.</span></h2>
+                    </div><span class="live-label"><i></i> LIVE PROGRESS</span>
+                </div>
+                <div class="stats">
+                    <article class="stat-card">
+                        <div class="stat-head"><span class="stat-icon orange-icon">◷</span><span
+                                class="stat-overline">BUGUN</span></div><strong><span id="minutesStat">0</span><small>
+                                min</small></strong>
+                        <p>O‘qish vaqti</p>
+                        <div class="stat-track"><i id="minutesBar"></i></div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-head"><span class="stat-icon purple-icon">✓</span><span
+                                class="stat-overline">JAMI</span></div><strong><span id="testsStat">0</span><small>
+                                ta</small></strong>
+                        <p>Bajarilgan testlar</p>
+                        <div class="stat-track purple-track"><i id="testsBar"></i></div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-head"><span class="stat-icon green-icon">✧</span><span
+                                class="stat-overline">LUG‘AT</span></div><strong><span id="wordsStat">0</span><small>
+                                ta</small></strong>
+                        <p>O‘rganilgan so‘zlar</p>
+                        <div class="stat-track green-track"><i id="wordsBar"></i></div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-head"><span class="stat-icon yellow-icon">✺</span><span
+                                class="stat-overline">STREAK</span></div><strong><span id="streakStat">1</span><small>
+                                kun</small></strong>
+                        <p>O‘rganish odati</p>
+                        <div class="week-dots"><i class="done"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </article>
+                </div>
+
+                <div class="content-grid">
+                    <div class="wide-col">
+                        <div class="section-title compact">
+                            <div><span class="section-kicker">PICK UP WHERE YOU LEFT</span>
+                                <h2>Davom ettiring<span class="orange-period">.</span></h2>
+                            </div><button class="text-link" data-go="lessons">Barcha darslar ↗</button>
+                        </div>
+                        <article class="featured-lesson">
+                            <div class="lesson-art">
+                                <div class="lesson-art-top">LESSON <b>01</b></div>
+                                <div class="big-a">A<span>1</span></div>
+                                <div class="speech speech-one">Hello!</div>
+                                <div class="speech speech-two">How are you?</div>
+                                <div class="lesson-art-bottom">START SIMPLE. GO FAR.</div>
+                            </div>
+                            <div class="featured-copy">
+                                <div class="tag-line"><span class="tag">A1 · BEGINNER</span><span class="duration">◷ 12
+                                        daqiqa</span></div>
+                                <h3>Ingliz tilidagi ilk qadamingiz</h3>
+                                <p>Salomlashish, o‘zingizni tanishtirish va eng kerakli iboralar.</p>
+                                <div class="progress-label"><span id="introProgressText">0% yakunlandi</span><span>12
+                                        min</span></div>
+                                <div class="progress-track"><i id="introProgress"></i></div><button
+                                    class="btn btn-orange btn-small" id="continueLesson">Darsni ochish
+                                    <span>→</span></button>
+                            </div>
+                        </article>
+                        <div class="section-title compact skills-heading">
+                            <div><span class="section-kicker">THE FOUR PILLARS</span>
+                                <h2>4 ta ko‘nikma<span class="orange-period">.</span></h2>
+                            </div><button class="text-link" data-go="skills">Batafsil ↗</button>
+                        </div>
+                        <div class="skill-cards">
+                            <button class="skill-card" data-skill="Listening"><span
+                                    class="skill-symbol listening">♫</span><span><b>Listening</b><small>Eshitib
+                                        tushunish</small></span><span class="skill-arrow">↗</span></button>
+                            <button class="skill-card" data-skill="Reading"><span
+                                    class="skill-symbol reading">▤</span><span><b>Reading</b><small>O‘qib
+                                        tushunish</small></span><span class="skill-arrow">↗</span></button>
+                            <button class="skill-card" data-skill="Writing"><span
+                                    class="skill-symbol writing">✎</span><span><b>Writing</b><small>Yozma
+                                        nutq</small></span><span class="skill-arrow">↗</span></button>
+                            <button class="skill-card" data-skill="Speaking"><span
+                                    class="skill-symbol speaking">◉</span><span><b>Speaking</b><small>Og‘zaki
+                                        nutq</small></span><span class="skill-arrow">↗</span></button>
+                        </div>
+                    </div>
+                    <aside class="right-col">
+                        <div class="section-title compact">
+                            <div><span class="section-kicker">YOUR ROADMAP</span>
+                                <h2>Darajalar<span class="orange-period">.</span></h2>
+                            </div>
+                        </div>
+                        <div class="level-list">
+                            <button class="level-item current" data-level="A1"><span class="level-letter">A1</span><span
+                                    class="level-info"><b>Beginner</b><small>Asosiy iboralar</small></span><span
+                                    class="level-status">HOZIR</span></button>
+                            <button class="level-item" data-level="A2"><span class="level-letter">A2</span><span
+                                    class="level-info"><b>Elementary</b><small>Kundalik suhbat</small></span><span
+                                    class="level-status">01</span></button>
+                            <button class="level-item" data-level="B1"><span class="level-letter">B1</span><span
+                                    class="level-info"><b>Intermediate</b><small>Mustaqil muloqot</small></span><span
+                                    class="level-status">02</span></button>
+                            <button class="level-item" data-level="B2"><span class="level-letter">B2</span><span
+                                    class="level-info"><b>Upper-intermediate</b><small>Murakkab
+                                        mavzular</small></span><span class="level-status">03</span></button>
+                            <button class="level-item" data-level="C1"><span class="level-letter">C1</span><span
+                                    class="level-info"><b>Advanced</b><small>Ravon va aniq nutq</small></span><span
+                                    class="level-status">04</span></button>
+                        </div>
+                        <div class="daily-card">
+                            <div class="daily-card-top"><span>✳</span><small>WORD OF THE DAY</small></div>
+                            <h3 id="wordOfDay">Curious</h3>
+                            <p id="wordOfDayMeaning">Qiziquvchan</p>
+                            <div class="daily-example">“Stay curious. Keep learning.”</div><button id="saveDailyWord"
+                                class="save-word">＋ Lug‘atga qo‘shish</button>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="page" id="page-lessons">
+                <div class="page-intro"><span class="section-kicker">LEARN STEP BY STEP</span>
+                    <h1>Darsliklar<span class="orange-period">.</span></h1>
+                    <p>Darajangizni tanlang va ingliz tilini ketma-ket o‘rganing.</p>
+                </div>
+                <div class="filter-row" id="lessonFilters"><button class="filter active"
+                        data-filter="ALL">Barchasi</button><button class="filter" data-filter="A1">A1
+                        Beginner</button><button class="filter" data-filter="A2">A2 Elementary</button><button
+                        class="filter" data-filter="B1">B1 Intermediate</button><button class="filter"
+                        data-filter="B2">B2 Upper</button><button class="filter" data-filter="C1">C1 Advanced</button>
+                </div>
+                <div class="lesson-grid" id="lessonGrid"></div>
+            </section>
+
+            <section class="page" id="page-tests">
+                <div class="page-intro"><span class="section-kicker">CHECK YOUR KNOWLEDGE</span>
+                    <h1>Test markazi<span class="orange-period">.</span></h1>
+                    <p>Bilimingizni tekshiring. Har bir test oxirida natijangizni ko‘rasiz.</p>
+                </div>
+                <div class="test-layout">
+                    <div class="test-intro-card">
+                        <div class="test-big-icon">✓</div><span class="tag">QUICK TEST</span>
+                        <h2>Grammar & Vocabulary</h2>
+                        <p>10 ta savol orqali asosiy grammatikangizni tekshiring.</p>
+                        <div class="test-meta"><span>◷ 5–8 daqiqa</span><span>• 10 savol</span><span>• A1–A2</span>
+                        </div><button class="btn btn-orange" id="startTest">Testni boshlash <span>→</span></button>
+                    </div>
+                    <div class="test-side-note"><span class="note-star">✳</span>
+                        <h3>Bilim — bu progress.</h3>
+                        <p>Natijangizni boshqalar bilan emas, kechagi o‘zingiz bilan solishtiring.</p>
+                        <div class="best-score">ENG YAXSHI NATIJA <strong id="bestScore">—</strong></div>
+                    </div>
+                </div>
+                <div id="quizArea" class="quiz-area hidden"></div>
+            </section>
+
+            <section class="page" id="page-vocabulary">
+                <div class="page-intro"><span class="section-kicker">BUILD YOUR WORD BANK</span>
+                    <h1>Lug‘at daftari<span class="orange-period">.</span></h1>
+                    <p>Yangi so‘zlarni saqlang, takrorlang va xotirada mustahkamlang.</p>
+                </div>
+                <div class="vocab-toolbar"><label class="search-box"><span>⌕</span><input id="wordSearch" type="search"
+                            placeholder="So‘z yoki tarjima qidirish..." /></label><button class="btn btn-orange"
+                        id="addWordButton">＋ So‘z qo‘shish</button></div>
+                <div class="vocab-summary">
+                    <div><span>JAMI SO‘ZLAR</span><b id="vocabTotal">0</b></div>
+                    <div><span>O‘RGANILGAN</span><b id="vocabLearned">0</b></div>
+                    <div><span>TAKRORLASH KERAK</span><b id="vocabReview">0</b></div>
+                </div>
+                <div class="vocab-grid" id="vocabGrid"></div>
+                <div class="empty-state hidden" id="vocabEmpty"><span>Aa</span>
+                    <h3>Hali so‘zlar yo‘q</h3>
+                    <p>“So‘z qo‘shish” tugmasi orqali lug‘atingizni yarating.</p>
+                </div>
+            </section>
+
+            <section class="page" id="page-typing">
+                <div class="page-intro"><span class="section-kicker">TYPE. LEARN. REPEAT.</span>
+                    <h1>Typing lab<span class="orange-period">.</span></h1>
+                    <p>Inglizcha matnlarni tez va aniq yozish orqali mashq qiling.</p>
+                </div>
+                <div class="typing-panel">
+                    <div class="typing-top">
+                        <div><span class="section-kicker">CURRENT SESSION</span>
+                            <h2>Typing practice</h2>
+                        </div>
+                        <div class="typing-stats">
+                            <div><small>VAQT</small><b id="typingTime">30s</b></div>
+                            <div><small>WPM</small><b id="typingWpm">0</b></div>
+                            <div><small>ANIQLIK</small><b id="typingAccuracy">100%</b></div>
+                        </div>
+                    </div>
+                    <div class="typing-mode"><span>Matn darajasi:</span><select id="typingLevel">
+                            <option value="A1">A1 · Beginner</option>
+                            <option value="A2">A2 · Elementary</option>
+                            <option value="B1">B1 · Intermediate</option>
+                            <option value="B2">B2 · Upper-intermediate</option>
+                            <option value="C1">C1 · Advanced</option>
+                        </select><button class="btn btn-ghost btn-small" id="newTypingText">↻ Yangi matn</button></div>
+                    <div class="typing-text" id="typingText">Learning English opens doors to new ideas, people, and
+                        opportunities.</div><textarea id="typingInput"
+                        placeholder="Matnni shu yerga yozishni boshlang..." rows="4" spellcheck="false"></textarea>
+                    <div class="typing-bottom"><span id="typingFeedback">Boshlash uchun matnni yozing.</span><button
+                            class="btn btn-orange" id="typingRestart">Qayta boshlash ↻</button></div>
+                    <div class="typing-result hidden" id="typingResult"></div>
+                </div>
+            </section>
+
+            <section class="page" id="page-skills">
+                <div class="page-intro"><span class="section-kicker">THE FOUR PILLARS</span>
+                    <h1>4 ta ko‘nikma<span class="orange-period">.</span></h1>
+                    <p>CEFR tayyorgarligida to‘rtta ko‘nikmani birgalikda rivojlantiring.</p>
+                </div>
+                <div class="skills-detail-grid">
+                    <article class="skill-detail"><span class="skill-symbol listening">♫</span><span class="tag">01 /
+                            AUDIO</span>
+                        <h2>Listening</h2>
+                        <p>Audio yoki matnni tinglab, asosiy fikr va muhim ma’lumotlarni tushunishni mashq qiling.</p>
+                        <button class="text-link skill-open" data-skill="Listening">Mashqni ochish ↗</button>
+                        <div class="skill-detail-bg">♫</div>
+                    </article>
+                    <article class="skill-detail"><span class="skill-symbol reading">▤</span><span class="tag">02 /
+                            TEXT</span>
+                        <h2>Reading</h2>
+                        <p>Matnlarni o‘qish, kontekstdan ma’no topish va savollarga javob berish.</p><button
+                            class="text-link skill-open" data-skill="Reading">Mashqni ochish ↗</button>
+                        <div class="skill-detail-bg">R</div>
+                    </article>
+                    <article class="skill-detail"><span class="skill-symbol writing">✎</span><span class="tag">03 /
+                            WRITE</span>
+                        <h2>Writing</h2>
+                        <p>Gap tuzishdan boshlab, xat va qisqa fikrlarni ingliz tilida yozishni mashq qiling.</p><button
+                            class="text-link skill-open" data-skill="Writing">Mashqni ochish ↗</button>
+                        <div class="skill-detail-bg">W</div>
+                    </article>
+                    <article class="skill-detail"><span class="skill-symbol speaking">◉</span><span class="tag">04 /
+                            SPEAK</span>
+                        <h2>Speaking</h2>
+                        <p>Kundalik savollarga ovoz chiqarib javob bering. Javobingizni yozib, o‘zingiz tahlil qiling.
+                        </p><button class="text-link skill-open" data-skill="Speaking">Mashqni ochish ↗</button>
+                        <div class="skill-detail-bg">S</div>
+                    </article>
+                </div>
+                <div class="practice-prompt" id="skillPrompt"><span class="section-kicker">TODAY'S SPEAKING
+                        PROMPT</span>
+                    <h2>Tell me about yourself.</h2>
+                    <p>Ismingiz, yoshingiz, qayerdan ekaningiz va nimalarni yoqtirishingiz haqida 4–5 ta gap ayting.</p>
+                    <button class="btn btn-orange" id="showPrompt">Boshqa mavzu <span>↻</span></button>
+                    <div class="prompt-tip hidden" id="promptTip">Try: “My name is…”, “I am from…”, “In my free time,
+                        I…”</div>
+                </div>
+            </section>
+
+            <section class="page" id="page-levels">
+                <div class="page-intro"><span class="section-kicker">YOUR ROADMAP</span>
+                    <h1>CEFR yo‘li<span class="orange-period">.</span></h1>
+                    <p>A1 dan C1 gacha bo‘lgan bosqichlar bilan maqsadingiz sari harakat qiling.</p>
+                </div>
+                <div class="roadmap" id="roadmap"></div>
+                <div class="level-note"><span>✳</span>
+                    <div><b>Eslatma</b>
+                        <p>Bu sayt o‘quv mashqlari uchun. Rasmiy CEFR darajasini aniqlash uchun tan olingan imtihon
+                            topshirish kerak.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer"><span>© 2026 CEFR MASTER</span><span>MADE FOR YOUR NEXT LEVEL <b>✳</b></span>
+            </footer>
+        </main>
+    </div>
+
+    <div class="modal-backdrop hidden" id="modalBackdrop">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close"
+                id="modalClose" aria-label="Yopish">×</button><span class="section-kicker" id="modalKicker">CEFR
+                MASTER</span>
+            <h2 id="modalTitle">So‘z qo‘shish</h2>
+            <form id="wordForm"><label>Inglizcha so‘z<input id="newEnglish" required maxlength="60"
+                        placeholder="e.g. confident" /></label><label>O‘zbekcha tarjimasi<input id="newUzbek" required
+                        maxlength="100" placeholder="masalan, o‘ziga ishongan" /></label><label>Misol gap
+                    (ixtiyoriy)<input id="newExample" maxlength="160" placeholder="I feel confident today." /></label>
+                <div class="modal-actions"><button type="button" class="btn btn-ghost" id="modalCancel">Bekor
+                        qilish</button><button type="submit" class="btn btn-orange">Saqlash <span>✓</span></button>
+                </div>
+            </form> 
+        </div>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
